@@ -58,3 +58,11 @@ UPDATE customer SET email= 'micheal_york@gmail.com' WHERE customer_id = 3 RETURN
 --Delete the last customer
 
 DELETE FROM customer WHERE store_id = 3 RETURNING *
+
+1- Get total payment that is above the average of all payments, join staff who made rental and customer. Data should be as in the image.
+
+2- select all payments which happened between 2007-02-15 - 2007-02-20 and join customers who made payment
+
+3- select all films and sort by title
+
+4- select  all payments where amount between 2-5 join staff and customer
