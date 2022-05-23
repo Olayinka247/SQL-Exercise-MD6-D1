@@ -59,10 +59,24 @@ UPDATE customer SET email= 'micheal_york@gmail.com' WHERE customer_id = 3 RETURN
 
 DELETE FROM customer WHERE store_id = 3 RETURNING *
 
-1- Get total payment that is above the average of all payments, join staff who made rental and customer. Data should be as in the image.
+--Get total payment that is above the average of all payments, join staff who made rental and customer. Data should be as in the image.
+SELECT c.first_name, c.last_name, s.first_name, s.last_name, SUM(p.amount) FROM customer c
+JOIN payment p
+ON p.customer_id = c.customer_id
+JOIN staff s
+ON S.staff_id = p.staff_id
+GROUP BY c.customer_id, s.staff_id, p.payment_id
+HAVING SUM(p.amount) > (SELECT AVG(AMOUNT) FROM payment)
+ORDER BY SUM(p.amount) DESC
 
-2- select all payments which happened between 2007-02-15 - 2007-02-20 and join customers who made payment
+--select all payments which happened between 2007-02-15 - 2007-02-20 and join customers who made payment
+SELECT * FROM payment
+JOIN customer ON payment.customer_id=customer.customer_id
+WHERE payment_date BETWEEN '2007-02-15' AND '2007-02-20'
 
-3- select all films and sort by title
+--select all films and sort by title
+SELECT * FROM film
+ORDER BY title
 
-4- select  all payments where amount between 2-5 join staff and customer
+
+
